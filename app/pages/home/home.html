@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-navbar #content primary >
+    <button menuToggle=""><ion-icon name="menu"></ion-icon></button>
+
+    <ion-title>Youtube App</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-menu type="overlay" [content]="content">
+  <ion-toolbar>
+    <ion-title>Youtube App</ion-title>
+    <button menuToggle><ion-icon name="close"></ion-icon></button>
+  </ion-toolbar>
+  <ion-content>
+    <ion-list>
+      <ion-list-header>Search Tag</ion-list-header>
+      <button menuClose ion-item (click)="search('雲海')">
+        雲海
+      </button>
+      <button menuClose ion-item (click)="search('摩星嶺4號')">
+        摩星嶺4號
+      </button>
+      <button menuClose ion-item (click)="search('靈異旅行團')">
+        靈異旅行團
+      </button>
+      <button menuClose ion-item (click)="search('恐怖在線')">
+        恐怖在線
+      </button>
+      <button menuClose ion-item (click)="search('越夜越心慌')">
+        越夜越心慌
+      </button>
+      <button menuClose ion-item (click)="edmondpoonLive()">
+        恐怖在線 Live
+      </button>
+      <ion-list-header>Setting</ion-list-header>
+      <button menuClose ion-item (click)="goToSettingPage()">
+        <ion-icon name="hammer"></ion-icon>
+        Setting
+      </button>
+
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-content padding class="home">
+
+
+
+  <ion-searchbar type="text" (ngModelChange)="search($event)" [(ngModel)]="searchInput" name="searchInput"></ion-searchbar>
+  <ion-item><iframe webkit-playsinline id="ytplayer" class="" width="100%" frameborder="0" [src]="videoUrl"></iframe></ion-item>
+  <ion-item *ngIf="edmondPoon">
+    <audio webkit-playsinline preload="auto" *ngIf="edmondPoon" controls>
+      <source src="http://alive.dimbo.tv:7000/;stream.nsv&type=mp3" type="audio/mpeg">
+    </audio>
+  </ion-item>
+
+  <ion-item>Now Playing: {{playingName}}</ion-item>
+  <ion-item><ion-icon name="arrow-back" *ngIf="previousPageTk" (click)="page(previousPageTk,searchKey)"></ion-icon> <ion-icon name="arrow-forward" *ngIf="nextPageTk" (click)="page(nextPageTk,searchKey)" ></ion-icon></ion-item>
+  <ion-list>
+    <ion-item *ngFor="let item of videoList" (click)="playVideo(item.id.videoId,item.snippet.title,1)" >
+
+      {{item.snippet.title}}
+    </ion-item>
+  </ion-list>
+</ion-content>
