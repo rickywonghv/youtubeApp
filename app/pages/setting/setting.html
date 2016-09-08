@@ -15,6 +15,9 @@
 
 <ion-content padding class="setting">
   <ion-list>
-    <ion-list-header>Setting</ion-list-header>
+    <ion-item>
+      <ion-label> Show Image</ion-label>
+      <ion-toggle checked="false" [(ngModel)]="settingImg" name="settingImg"></ion-toggle>
+    </ion-item>
   </ion-list>
 </ion-content>

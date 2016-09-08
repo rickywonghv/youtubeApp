@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { MyApp } from 'app';
 
 /*
   Generated class for the SettingPage page.
@@ -12,7 +13,7 @@ import { NavController } from 'ionic-angular';
 })
 export class SettingPage {
 
-  constructor(private navCtrl: NavController) {
+  constructor(private navCtrl: NavController,private myapp:MyApp) {
 
   }
 

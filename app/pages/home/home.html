@@ -29,6 +29,9 @@
       <button menuClose ion-item (click)="search('越夜越心慌')">
         越夜越心慌
       </button>
+      <button menuClose ion-item (click)="search('連環快拍')">
+        連環快拍
+      </button>
       <button menuClose ion-item (click)="edmondpoonLive()">
         恐怖在線 Live
       </button>
@@ -43,9 +46,6 @@
 </ion-menu>
 
 <ion-content padding class="home">
-
-
-
   <ion-searchbar type="text" (ngModelChange)="search($event)" [(ngModel)]="searchInput" name="searchInput"></ion-searchbar>
   <ion-item><iframe webkit-playsinline id="ytplayer" class="" width="100%" frameborder="0" [src]="videoUrl"></iframe></ion-item>
   <ion-item *ngIf="edmondPoon">
@@ -54,7 +54,7 @@
     </audio>
   </ion-item>
 
-  <ion-item>Now Playing: {{playingName}}</ion-item>
+  <ion-list-header>Now Playing: {{playingName}}</ion-list-header>
   <ion-item><ion-icon name="arrow-back" *ngIf="previousPageTk" (click)="page(previousPageTk,searchKey)"></ion-icon> <ion-icon name="arrow-forward" *ngIf="nextPageTk" (click)="page(nextPageTk,searchKey)" ></ion-icon></ion-item>
   <ion-list>
     <ion-item *ngFor="let item of videoList" (click)="playVideo(item.id.videoId,item.snippet.title,1)" >
