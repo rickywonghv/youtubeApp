@@ -17,7 +17,10 @@
   <ion-list>
     <ion-item>
       <ion-label> Show Image</ion-label>
-      <ion-toggle checked="false" [(ngModel)]="settingImg" name="settingImg"></ion-toggle>
+      <ion-toggle checked="false" [(ngModel)]="imageSetting" (ngModelChange)="changeImgSetting($event)"></ion-toggle>
+    </ion-item>
+    <ion-item (click)="clearHis()" >
+      <ion-label> Clear History</ion-label>
     </ion-item>
   </ion-list>
 </ion-content>

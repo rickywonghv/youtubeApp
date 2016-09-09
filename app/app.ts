@@ -1,9 +1,9 @@
-import {Component} from '@angular/core';
+import {Component, provide} from '@angular/core';
 import {Platform, ionicBootstrap} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
 import {TabsPage} from './pages/tabs/tabs';
-import {Storage, LocalStorage} from 'ionic-angular';
 import { Toast } from 'ionic-native';
+import {AppService} from "./service/home.service";
 
 @Component({
   templateUrl: 'build/menu.html'

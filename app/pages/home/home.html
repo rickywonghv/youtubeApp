@@ -13,7 +13,6 @@
   </ion-toolbar>
   <ion-content>
     <ion-list>
-      <ion-list-header>Search Tag</ion-list-header>
       <button menuClose ion-item (click)="search('雲海')">
         雲海
       </button>
@@ -35,18 +34,25 @@
       <button menuClose ion-item (click)="edmondpoonLive()">
         恐怖在線 Live
       </button>
+      <button menuClose ion-item (click)="search('無奇不有')">
+        無奇不有
+      </button>
+      <button menuClose ion-item (click)="goToRadioPage()">
+        科技節目
+      </button>
+    </ion-list>
+    <ion-list>
       <ion-list-header>Setting</ion-list-header>
       <button menuClose ion-item (click)="goToSettingPage()">
         <ion-icon name="hammer"></ion-icon>
         Setting
       </button>
-
     </ion-list>
   </ion-content>
 </ion-menu>
 
 <ion-content padding class="home">
-  <ion-searchbar type="text" (ngModelChange)="search($event)" [(ngModel)]="searchInput" name="searchInput"></ion-searchbar>
+  <ion-searchbar type="text" (ngModelChange)="search($event)" [(ngModel)]="searchInput"></ion-searchbar>
   <ion-item><iframe webkit-playsinline id="ytplayer" class="" width="100%" frameborder="0" [src]="videoUrl"></iframe></ion-item>
   <ion-item *ngIf="edmondPoon">
     <audio webkit-playsinline preload="auto" *ngIf="edmondPoon" controls>
@@ -58,7 +64,7 @@
   <ion-item><ion-icon name="arrow-back" *ngIf="previousPageTk" (click)="page(previousPageTk,searchKey)"></ion-icon> <ion-icon name="arrow-forward" *ngIf="nextPageTk" (click)="page(nextPageTk,searchKey)" ></ion-icon></ion-item>
   <ion-list>
     <ion-item *ngFor="let item of videoList" (click)="playVideo(item.id.videoId,item.snippet.title,1)" >
-
+      <img *ngIf="showImg" src="{{item.snippet.thumbnails.default.url}}" width="{{item.snippet.thumbnails.default.width}}" height="{{item.snippet.thumbnails.default.height}}">
       {{item.snippet.title}}
     </ion-item>
   </ion-list>
