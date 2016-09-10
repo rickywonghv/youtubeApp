@@ -23,7 +23,7 @@ export class AppService {
 
   public page(pageTk:string,keyword:string){
     let pageUrl=this.url+"&key="+this.apikey+"&maxResults=20&safeSearch=moderate&type=video&pageToken="+pageTk+"&q="+keyword+"%7C"+"&regionCode="+this.regionCode;
-    return this.jsonp.request(pageUrl);
+    return this.http.get(pageUrl);
   }
 
   public edmondponLive(){

@@ -19,7 +19,7 @@ declare var window: any;
   pipes:[secondsToTimePipe]
 })
 export class HomePage{
-  public videoList;
+  public videoList=[];
   public videoUrl;
   public playingName;
   private nextPageTk;
@@ -60,6 +60,23 @@ export class HomePage{
     (<HTMLElement>document.activeElement).blur()
   }
 
+  public doInfinite(infiniteScroll) {
+    setTimeout(() => {
+      this.page(this.nextPageTk,this.searchKey);
+      infiniteScroll.complete();
+    }, 500);
+  }
+
+  public infinite(result){
+    this.nextPageTk=result.nextPageToken;
+    this.previousPageTk=result.prevPageToken;
+    this.setting.showImg().then(res=>this.setImg(res));
+    let arr=result.items;
+    for (var i = 0; i < arr.length; i++) {
+      this.videoList.push(arr[i]);
+    }
+  }
+
   public listResult(result:any){
     this.videoList=result.items;
     this.nextPageTk=result.nextPageToken;
@@ -73,9 +90,11 @@ export class HomePage{
   }
 
   public search(key:string){
-    this.appservice.getSearch(key).subscribe(res=>this.listResult(res.json()));
+    this.videoList=[];
+    this.appservice.getSearch(key).subscribe(res=>this.infinite(res.json()));
     this.searchKey=key;
     this.setCurrentSearchKey(key);
+
   }
 
   public playVideo(Id,playingName,autoPlay){
@@ -90,7 +109,7 @@ export class HomePage{
     //https://www.youtube.com/watch?v=
   }
   private page(pageTk:string,key:string){
-    this.appservice.page(pageTk,key).subscribe(res=>this.listResult(res.json()));
+    this.appservice.page(pageTk,key).subscribe(res=>this.infinite(res.json()));
   }
 
   public playingToast(text:string){
