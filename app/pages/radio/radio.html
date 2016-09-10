@@ -23,9 +23,12 @@
     </ion-select>
   </ion-item>
   <ion-item>
-    <ion-icon class="icon" name="play" (click)="play()"></ion-icon>
-    <ion-icon class="icon" name="pause" (click)="pause()"></ion-icon>
-    {{currentTime}}
+    <ion-icon class="icon playerIcon" name="play" (click)="play()"></ion-icon>
+    <ion-icon class="icon playerIcon" name="pause" (click)="pause()"></ion-icon>
+    <ion-icon class="icon playerIcon" name="rewind" (click)="rs()" ></ion-icon>
+    <ion-icon class="icon playerIcon" name="fastforward" (click)="ff()" ></ion-icon>
+
+    <span class="timeCur">{{currentTime|secondsToTime}}</span>
     <p>Now playing: {{playingRadio}}</p>
   </ion-item>
   <ion-list>

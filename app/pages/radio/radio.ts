@@ -1,9 +1,10 @@
-import { Component} from '@angular/core';
+import {Component} from '@angular/core';
 import { NavController } from 'ionic-angular';
 import {AppService} from "../../service/home.service";
 import {JSONP_PROVIDERS} from '@angular/http';
 import {SafeResourceUrl, DomSanitizationService} from "@angular/platform-browser";
 import {Observable} from 'rxjs/Rx';
+import {secondsToTimePipe} from './time.pipe';
 
 /*
   Generated class for the RadioPage page.
@@ -13,8 +14,11 @@ import {Observable} from 'rxjs/Rx';
 */
 @Component({
   templateUrl: 'build/pages/radio/radio.html',
+  pipes:[secondsToTimePipe],
   providers:[AppService,JSONP_PROVIDERS]
 })
+
+
 export class RadioPage {
   public items;
   public playingRadio;
@@ -46,7 +50,6 @@ export class RadioPage {
     this.audio.load();
     this.audio.play();
     this.updateCrt();
-
   }
   private pause(){
     this.audio.pause();
@@ -63,4 +66,12 @@ export class RadioPage {
     this.timer.unsubscribe();
   }
 
+  private ff(){
+    this.audio.currentTime=this.audio.currentTime+10;
+  }
+  private rs(){
+    if(this.audio.currentTime>10){
+      this.audio.currentTime=this.audio.currentTime-10;
+    }
+  }
 }
