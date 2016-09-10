@@ -3,6 +3,7 @@ import { NavController } from 'ionic-angular';
 import {AppService} from "../../service/home.service";
 import {JSONP_PROVIDERS} from '@angular/http';
 import {SafeResourceUrl, DomSanitizationService} from "@angular/platform-browser";
+import {Observable} from 'rxjs/Rx';
 
 /*
   Generated class for the RadioPage page.
@@ -21,14 +22,12 @@ export class RadioPage {
   public itProgramme;
   private selectedPro;
   audio = new Audio();
-  currentTime=this.audio.currentTime;
+  currentTime;
+
+  timer;
 
   constructor(private navCtrl: NavController,private appserivce:AppService,private sanitizer: DomSanitizationService) {
     this.init();
-    this.audio.ontimeupdate = function() {this.currentTime=this.audio.currentTime;};
-  }
-  public updateTime(){
-    this.currentTime=this.audio.currentTime;
   }
   private init(){
       this.appserivce.radioservice("digi").subscribe(res=>this.listProgramme(res.json()));
@@ -46,14 +45,22 @@ export class RadioPage {
     this.audio.src = url;
     this.audio.load();
     this.audio.play();
-    this.audio.ontimeupdate = function() {this.currentTime=this.audio.currentTime;};
+    this.updateCrt();
+
   }
   private pause(){
     this.audio.pause();
-    this.audio.ontimeupdate = function() {this.currentTime=this.audio.currentTime;};
+    this.clearupdateCrt();
   }
   private play() {
     this.audio.play();
-    this.audio.ontimeupdate = function() {this.currentTime=this.audio.currentTime;};
+    this.updateCrt();
   }
+  private updateCrt(){
+    this.timer=Observable.interval(500).map((x) => x+1).subscribe((x) => {this.currentTime=this.audio.currentTime});
+  }
+  private clearupdateCrt(){
+    this.timer.unsubscribe();
+  }
+
 }
