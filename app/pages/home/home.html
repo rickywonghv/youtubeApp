@@ -1,8 +1,13 @@
 <ion-header>
   <ion-navbar #content primary >
     <button menuToggle=""><ion-icon name="menu"></ion-icon></button>
-
     <ion-title>Youtube App</ion-title>
+    <ion-buttons end>
+      <button ion-button class="disable-hover bar-button bar-button-default activated" (click)="presentPopover($event)">
+        <span button-inner><ion-icon name="more" class="ion-ios-more"></ion-icon></span>
+      </button>
+    </ion-buttons>
+
   </ion-navbar>
 </ion-header>
 
@@ -36,16 +41,6 @@
       </button>
       <button menuClose ion-item (click)="search('無奇不有')">
         無奇不有
-      </button>
-      <button menuClose ion-item (click)="goToRadioPage()">
-        網台
-      </button>
-    </ion-list>
-    <ion-list>
-      <ion-list-header>Setting</ion-list-header>
-      <button menuClose ion-item (click)="goToSettingPage()">
-        <ion-icon name="hammer"></ion-icon>
-        Setting
       </button>
     </ion-list>
   </ion-content>

@@ -1,21 +1,22 @@
 import {Component} from '@angular/core';
-import {NavController, Platform,Storage, LocalStorage} from 'ionic-angular';
+import {NavController, Platform, Storage, LocalStorage, ModalController, PopoverController} from 'ionic-angular';
 import {AppService} from '../../service/home.service';
 import {DomSanitizationService, SafeResourceUrl} from "@angular/platform-browser";
 import {SettingPage} from "../setting/setting";
 import {RadioPage} from "../radio/radio";
-import { BackgroundMode } from 'ionic-native';
 import {JSONP_PROVIDERS} from '@angular/http';
+import {playerService} from "../../service/player";
+import {secondsToTimePipe} from '../radio/time.pipe';
+import {PopoverPage} from "../popover/popover";
 
 
-BackgroundMode.setDefaults();
-BackgroundMode.enable();
 
 declare var window: any;
 
 @Component({
   templateUrl: 'build/pages/home/home.html',
-  providers: [AppService,SettingPage,RadioPage,JSONP_PROVIDERS]
+  providers: [AppService,SettingPage,RadioPage,playerService,JSONP_PROVIDERS],
+  pipes:[secondsToTimePipe]
 })
 export class HomePage{
   public videoList;
@@ -31,8 +32,16 @@ export class HomePage{
   private currentVideoId;
   private currentVidName;
 
-  constructor(public navCtrl: NavController,private appservice:AppService,private sanitizer: DomSanitizationService,private platform: Platform,private setting:SettingPage) {
+
+  constructor(public navCtrl: NavController,private appservice:AppService,private sanitizer: DomSanitizationService,private platform: Platform,private setting:SettingPage,private modalCtrl: ModalController,private popoverCtrl: PopoverController) {
     this.init();
+  }
+
+  public presentPopover(myEvent) {
+    let popover = this.popoverCtrl.create(PopoverPage);
+    popover.present({
+      ev: myEvent
+    });
   }
 
   private setImg(res){
@@ -48,6 +57,7 @@ export class HomePage{
   }
   public goToRadioPage(){
     this.navCtrl.push(RadioPage);
+    (<HTMLElement>document.activeElement).blur()
   }
 
   public listResult(result:any){
