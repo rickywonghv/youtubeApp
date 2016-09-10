@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar primary>
-    <ion-title>科技節目</ion-title>
+    <ion-title>網台</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -20,12 +20,15 @@
       <ion-option value="digi" checked="true">數碼生活頻道</ion-option>
       <ion-option value="hkpug">HKPUG</ion-option>
       <ion-option value="randgad">亂gad</ion-option>
+      <ion-option value="mikelees">迷離舊金山 (Old)</ion-option>
+      <ion-option value="ibhk">IBHK</ion-option>
+      <ion-option value="nop">無奇不有</ion-option>
     </ion-select>
   </ion-item>
   <ion-item>
-    <ion-icon class="icon playerIcon" name="play" (click)="play()"></ion-icon>
-    <ion-icon class="icon playerIcon" name="pause" (click)="pause()"></ion-icon>
     <ion-icon class="icon playerIcon" name="rewind" (click)="rs()" ></ion-icon>
+    <ion-icon class="icon playerIcon pauseBtn" name="pause" (click)="pause()"></ion-icon>
+    <ion-icon class="icon playerIcon playBtn" name="play" (click)="play()"></ion-icon>
     <ion-icon class="icon playerIcon" name="fastforward" (click)="ff()" ></ion-icon>
 
     <span class="timeCur">{{currentTime|secondsToTime}}</span>

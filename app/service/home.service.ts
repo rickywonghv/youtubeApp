@@ -31,24 +31,33 @@ export class AppService {
     return this.http.get(pageUrl);
   }
 
-  public ourradioDigi(){
-    let url="http://rss2json.com/api.json?rss_url=http://feeds.feedburner.com/damon/digi?format=xml";
-    return this.http.get(url);
-  }
-
   public radioservice(call:string){
     let xmltojson="http://rss2json.com/api.json?rss_url=";
+
     let digi="http://feeds.feedburner.com/damon/digi?format=xml";
     let hkpug="http://feeds.feedburner.com/damon/hkpug?format=xml";
     let randgad="http://download.randgad.com/feed.xml";
+    let mikelees="http://www.openskyarchive.com/podcastfeed.php?show_id=38";
+    let ibhk="http://IBHK.Asia/?feed=podcast";
+    let nop="http://hkr2.netpodcast.net/hkpeanut3.php?channelid=nosurprise";
+
     let url;
+
+
     if(call=="hkpug"){
       url=xmltojson+hkpug;
     }else if(call=="digi"){
       url=xmltojson+digi;
     }else if(call=="randgad"){
       url=xmltojson+randgad;
+    }else if(call=="mikelees"){
+      url=xmltojson+mikelees;
+    }else if(call=="ibhk"){
+      url=xmltojson+ibhk;
+    }else if(call=="nop"){
+      url=xmltojson+nop;
     }
+
     return this.http.get(url);
   }
 

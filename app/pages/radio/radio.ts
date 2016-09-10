@@ -5,6 +5,10 @@ import {JSONP_PROVIDERS} from '@angular/http';
 import {SafeResourceUrl, DomSanitizationService} from "@angular/platform-browser";
 import {Observable} from 'rxjs/Rx';
 import {secondsToTimePipe} from './time.pipe';
+import { BackgroundMode } from 'ionic-native';
+
+BackgroundMode.setDefaults();
+BackgroundMode.enable();
 
 /*
   Generated class for the RadioPage page.

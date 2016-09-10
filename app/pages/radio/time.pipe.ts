@@ -8,8 +8,8 @@ import {Pipe} from "@angular/core";
 })
 export class secondsToTimePipe{
   times = {
-    year: 31557600,
-    month: 2629746,
+    yr: 31557600,
+    mon: 2629746,
     day: 86400,
     hr: 3600,
     min: 60,
